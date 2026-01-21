@@ -1,5 +1,6 @@
 import React from 'react';
 import './task-form.css';
+import Tag from '../Tag/tag';
 
 const TaskForm = () => {
     return (
@@ -9,15 +10,15 @@ const TaskForm = () => {
                     <input type='text' className='task_input' placeholder='Enter Task Name' />
                     <div className='task_form_bottom'>
                         <div>
-                            <button className='tag'>DEV</button>
-                            <button className='tag'>QA</button>
-                            <button className='tag'>Product Owner</button>
+                            <Tag tagName='DEV'/>
+                            <Tag tagName='QA'/>
+                            <Tag tagName='Product Owner'/>
                         </div>
                         <div>
                             <select className='task_status'>
                                 <option value='Ready for Development'>Ready for Development</option>
                                 <option value='In Progress'>In Progress</option>
-                                <optio value='Ready for Testing'>Ready for Testing</optio>
+                                <option value='Ready for Testing'>Ready for Testing</option>
                                 <option value='Closed'>Closed</option>
                             </select>
                             <button type='submit' className='task_submit'>+ Add</button>
