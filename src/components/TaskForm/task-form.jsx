@@ -6,7 +6,8 @@ const TaskForm = () => {
 
     const [taskData, setTaskData] = useState({
         task : '',
-        status: 'Ready for Development'
+        status: 'Ready for Development',
+        tags : []
     });
 
     const handleData = (e) => {
@@ -15,31 +16,35 @@ const TaskForm = () => {
             return { ...prev, [name]: value};
         });
     };
-    console.log("data received", taskData);
 
-    // const [task, setTask] = useState("");
-    // const [status, setStatus] = useState("");
+    const handleSubmit = (e) =>{
+        e.preventDefault(); //prevent default behaviour of refreshing page after form submit
+    }; 
 
-    // const handleTask = (e) => {
-    //     setTask(e.target.value);
-    // }
-    // console.log("task from state", task);
-    // const handleStatus = (e)=>{
-    //     setStatus(e.target.value);
-    // }
-    // console.log("task status", status);
-    
+    const selectedTag = (tag)=>{
+        if(taskData.tags.some((item) => item ===tag)){
+            const filterTags = taskData.tags.filter((item)=> item !== tag);
+            setTaskData((prev)=>{
+                return { ...prev, tags: filterTags };
+            });
+        }else{
+            setTaskData((prev)=>{
+                return { ...prev, tags: [...prev.tags, tag] };
+            });
+        }
+    }
+    console.log("form data received", taskData);
 
     return (
         <>
             <header className='app_header'>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input type='text' className='task_input' name='task' placeholder='Enter Task Name' onChange={handleData}/>
                     <div className='task_form_bottom'>
                         <div>
-                            <Tag tagName='DEV'/>
-                            <Tag tagName='QA'/>
-                            <Tag tagName='Product Owner'/>
+                            <Tag tagName='DEV' selectedTag={selectedTag}/>
+                            <Tag tagName='QA' selectedTag={selectedTag}/>
+                            <Tag tagName='Product Owner' selectedTag={selectedTag}/>
                         </div>
                         <div>
                             <select className='task_status' name='status' onChange={handleData}>

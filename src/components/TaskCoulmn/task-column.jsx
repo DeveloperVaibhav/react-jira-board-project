@@ -3,7 +3,6 @@ import './task-column.css';
 import TaskCard from '../TaskCard/task-card';
 
 const TaskColumn = (props) => {
-  console.log(props);
   return (
     <>
       <section className='task_column'> 
