@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './task-form.css';
 import Tag from '../Tag/tag';
 
-const TaskForm = () => {
+const TaskForm = ({setTasks}) => {
 
     const [taskData, setTaskData] = useState({
         task : '',
@@ -23,6 +23,9 @@ const TaskForm = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault(); //prevent default behaviour of refreshing page after form submit
+        setTasks((prev)=>{
+            return [...prev, taskData];
+        })
     }; 
 
     const selectedTag = (tag)=>{
@@ -32,7 +35,7 @@ const TaskForm = () => {
             return {...prev, tags};
         });
     }
-    console.log("form data received", taskData);
+    //console.log("form data received", taskData);
 
     return (
         <>
@@ -49,7 +52,7 @@ const TaskForm = () => {
                             <select className='task_status' name='status' onChange={handleData}>
                                 <option value='Ready for Development'>Ready for Development</option>
                                 <option value='In Progress'>In Progress</option>
-                                <option value='Ready for Testing'>Ready for Testing</option>
+                                <option value='Ready for Test'>Ready for Test</option>
                                 <option value='Closed'>Closed</option>
                             </select>
                             <button type='submit' className='task_submit'>+ Add</button>
